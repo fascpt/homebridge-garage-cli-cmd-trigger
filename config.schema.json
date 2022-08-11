@@ -1,16 +1,16 @@
 {
-  "pluginAlias": "DummyGarage",
+  "pluginAlias": "GarageCMDTrigger",
   "pluginType": "accessory",
   "singular": false,
   "schema": {
-    "title": "Dummy Garage",
+    "title": "Garage Command Trigger",
     "type": "object",
     "properties": {
       "name": {
         "title": "Name",
         "type": "string",
         "required": true,
-        "default": "Dummy Garage",
+        "default": "Garage Command Trigger",
         "description": "Name of Garage to appear in Home app"
       },
       "autoCloseDelay": {

@@ -4,16 +4,16 @@ module.exports = function(homebridge) {
 	Service = homebridge.hap.Service;
 	Characteristic = homebridge.hap.Characteristic;
 	HomebridgeAPI = homebridge;
-	homebridge.registerAccessory('homebridge-dummy-garage', 'DummyGarage', DummyGarage);
+	homebridge.registerAccessory('homebridge-garage-cmd-trigger', 'GarageCMDTrigger', GarageCMDTrigger);
 }
 
-class DummyGarage {
+class GarageCMDTrigger {
 	constructor (log, config) {
 
 		//get config values
-		this.name = config['name'] || "Dummy Garage";
+		this.name = config['name'] || "Garage Command Trigger";
 		this.autoCloseDelay = config["autoCloseDelay"] === undefined ? 0 : Number(config["autoCloseDelay"]);
-		
+
 		//persist storage
 		this.cacheDirectory = HomebridgeAPI.user.persistPath();
 		this.storage = require('node-persist');
@@ -25,12 +25,12 @@ class DummyGarage {
 		this.lastOpened = new Date();
 		this.service = new Service.GarageDoorOpener(this.name, this.name);
 		this.setupGarageDoorOpenerService(this.service);
-		
+
 		this.informationService = new Service.AccessoryInformation();
 		this.informationService
-			.setCharacteristic(Characteristic.Manufacturer, 'github/rasod')
-			.setCharacteristic(Characteristic.Model, 'Dummy Garage')
-			.setCharacteristic(Characteristic.FirmwareRevision, '1.2.2')
+			.setCharacteristic(Characteristic.Manufacturer, 'github/fascpt')
+			.setCharacteristic(Characteristic.Model, 'Garage Command Trigger')
+			.setCharacteristic(Characteristic.FirmwareRevision, '1.3.0')
 			.setCharacteristic(Characteristic.SerialNumber, this.name.replace(/\s/g, '').toUpperCase());
 }
 
@@ -41,7 +41,7 @@ getServices () {
 setupGarageDoorOpenerService (service) {
 	this.log.debug("setupGarageDoorOpenerService");
 	this.log.debug("Cached State: " + this.cachedState);
-	
+
 	if((this.cachedState === undefined) || (this.cachedState === true)) {
 		this.log.debug("Using Saved OPEN State");
 		this.service.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.OPEN);
@@ -72,9 +72,9 @@ setupGarageDoorOpenerService (service) {
 						this.storage.setItem(this.name, false);
 					}, this.autoCloseDelay * 1000);
 				}
-				
+
 				callback();
-				
+
 			} else if (value === Characteristic.TargetDoorState.CLOSED)  {
 				this.log("Closing: " + this.name)
 				this.service.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.CLOSED);

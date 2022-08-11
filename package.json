@@ -1,21 +1,21 @@
 {
-  "name": "homebridge-dummy-garage",
-  "version": "1.2.3",
-  "description": "Dummy Garage Opener for Homebridge",
+  "name": "homebridge-garage-cmd-trigger",
+  "version": "1.3.0",
+  "description": "Garage Opener with command line triggers support for Homebridge",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/rasod/homebridge-dummy-garage.git"
+    "url": "git://github.com/fascpt/homebridge-garage-cmd-trigger.git"
   },
   "bugs": {
-    "url": "https://github.com/rasod/homebridge-dummy-garage/issues"
+    "url": "https://github.com/fascpt/homebridge-garage-cmd-trigger/issues"
   },
   "keywords": [
     "homebridge-plugin",
     "homebridge",
     "garage",
     "garagedoor",
-    "dummy garage",
+    "command line",
     "carplay"
   ],
   "engines": {

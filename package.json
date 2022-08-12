@@ -1,14 +1,14 @@
 {
-  "name": "homebridge-garage-cmd-trigger",
+  "name": "homebridge-garage-cli-cmd-trigger",
   "version": "1.3.0",
   "description": "Garage Opener with command line triggers support for Homebridge",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/fascpt/homebridge-garage-cmd-trigger.git"
+    "url": "git://github.com/fascpt/homebridge-garage-cli-cmd-trigger.git"
   },
   "bugs": {
-    "url": "https://github.com/fascpt/homebridge-garage-cmd-trigger/issues"
+    "url": "https://github.com/fascpt/homebridge-garage-cli-cmd-trigger/issues"
   },
   "keywords": [
     "homebridge-plugin",

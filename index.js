@@ -1,18 +1,21 @@
 var Service, Characteristic, HomebridgeAPI;
+var exec = require('child_process').exec;
 
 module.exports = function(homebridge) {
 	Service = homebridge.hap.Service;
 	Characteristic = homebridge.hap.Characteristic;
 	HomebridgeAPI = homebridge;
-	homebridge.registerAccessory('homebridge-garage-cmd-trigger', 'GarageCMDTrigger', GarageCMDTrigger);
+	homebridge.registerAccessory('homebridge-garage-cli-cmd-trigger', 'GarageCliCmdTrigger', GarageCliCmdTrigger);
 }
 
-class GarageCMDTrigger {
+class GarageCliCmdTrigger {
 	constructor (log, config) {
 
 		//get config values
-		this.name = config['name'] || "Garage Command Trigger";
+		this.name = config['name'] || "Garage CLI Command Trigger";
 		this.autoCloseDelay = config["autoCloseDelay"] === undefined ? 0 : Number(config["autoCloseDelay"]);
+		this.openCmd = config['openCmd'];
+		this.closeCmd = config['closeCmd'];
 
 		//persist storage
 		this.cacheDirectory = HomebridgeAPI.user.persistPath();
@@ -29,7 +32,7 @@ class GarageCMDTrigger {
 		this.informationService = new Service.AccessoryInformation();
 		this.informationService
 			.setCharacteristic(Characteristic.Manufacturer, 'github/fascpt')
-			.setCharacteristic(Characteristic.Model, 'Garage Command Trigger')
+			.setCharacteristic(Characteristic.Model, 'Garage CLI Command Trigger')
 			.setCharacteristic(Characteristic.FirmwareRevision, '1.3.0')
 			.setCharacteristic(Characteristic.SerialNumber, this.name.replace(/\s/g, '').toUpperCase());
 }
@@ -62,6 +65,10 @@ setupGarageDoorOpenerService (service) {
 				this.lastOpened = new Date();
 				this.service.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.OPEN);
 				this.storage.setItem(this.name, true);
+				if (this.openCmd !== undefined) {
+        			this.log("Executing OPEN command: '" + this.openCmd + "'");
+        			exec(this.openCmd);
+      			}
 				this.log.debug("autoCloseDelay = " + this.autoCloseDelay);
 				if (this.autoCloseDelay > 0) {
 					this.log("Closing in " + this.autoCloseDelay + " seconds.");
@@ -72,13 +79,15 @@ setupGarageDoorOpenerService (service) {
 						this.storage.setItem(this.name, false);
 					}, this.autoCloseDelay * 1000);
 				}
-
 				callback();
-
 			} else if (value === Characteristic.TargetDoorState.CLOSED)  {
 				this.log("Closing: " + this.name)
 				this.service.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.CLOSED);
 				this.storage.setItem(this.name, false);
+				if (this.closeCmd !== undefined) {
+        			this.log("Executing CLOSE command: '" + this.closeCmd + "'");
+        			exec(this.closeCmd);
+      			}
 				callback();
 			} else {
 				callback();

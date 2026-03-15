@@ -39,6 +39,7 @@ class GarageCliCmdTrigger {
 				this.log.debug("Cached State: " + cachedState);
 				if (cachedState === true) {
 					this.log.debug("Using Saved OPEN State");
+					this.service.setCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.OPEN);
 					this.service.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.OPEN);
 				} else {
 					this.log.debug("Using Default CLOSED State");

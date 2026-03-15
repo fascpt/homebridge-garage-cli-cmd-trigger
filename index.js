@@ -27,7 +27,7 @@ class GarageCliCmdTrigger {
 		this.informationService
 			.setCharacteristic(Characteristic.Manufacturer, 'github/fascpt')
 			.setCharacteristic(Characteristic.Model, 'Garage CLI Command Trigger')
-			.setCharacteristic(Characteristic.FirmwareRevision, '2.0.0-beta.1')
+			.setCharacteristic(Characteristic.FirmwareRevision, '2.0.0-beta.2')
 			.setCharacteristic(Characteristic.SerialNumber, this.name.replace(/\s/g, '').toUpperCase());
 
 		//persist storage (async init)
@@ -39,12 +39,12 @@ class GarageCliCmdTrigger {
 				this.log.debug("Cached State: " + cachedState);
 				if (cachedState === true) {
 					this.log.debug("Using Saved OPEN State");
-					this.service.setCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.OPEN);
-					this.service.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.OPEN);
+					this.service.updateCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.OPEN);
+					this.service.updateCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.OPEN);
 				} else {
 					this.log.debug("Using Default CLOSED State");
-					this.service.setCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.CLOSED);
-					this.service.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.CLOSED);
+					this.service.updateCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.CLOSED);
+					this.service.updateCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.CLOSED);
 				}
 			})
 			.catch((err) => {
@@ -61,8 +61,8 @@ setupGarageDoorOpenerService (service) {
 	this.log.debug("setupGarageDoorOpenerService");
 
 	// Default to CLOSED until cached state loads from storage
-	this.service.setCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.CLOSED);
-	this.service.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.CLOSED);
+	this.service.updateCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.CLOSED);
+	this.service.updateCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.CLOSED);
 
 	service.getCharacteristic(Characteristic.TargetDoorState)
 		.onGet(() => {

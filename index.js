@@ -27,7 +27,7 @@ class GarageCliCmdTrigger {
 		this.informationService
 			.setCharacteristic(Characteristic.Manufacturer, 'github/fascpt')
 			.setCharacteristic(Characteristic.Model, 'Garage CLI Command Trigger')
-			.setCharacteristic(Characteristic.FirmwareRevision, '2.0.0-beta.2')
+			.setCharacteristic(Characteristic.FirmwareRevision, '2.0.0')
 			.setCharacteristic(Characteristic.SerialNumber, this.name.replace(/\s/g, '').toUpperCase());
 
 		//persist storage (async init)

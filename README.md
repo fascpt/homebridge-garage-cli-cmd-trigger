@@ -1,10 +1,13 @@
 # homebridge-garage-cli-cmd-trigger
-[Homebridge](https://github.com/nfarina/homebridge) plugin to create a HomeKit Garage Door accessory with optional command line triggers. Why? iOS >13 CarPlay allows you to easily access your Garage when arriving and leaving your house. This plug-in allows to to create a Garage door which you can use as an automation trigger and trigger command line, e.g., to run a python script which sends a radio command to the Garage Door. Pull up to your house open the "Garage" on your dash which can unlock your front door, turn lights on, open your garage, etc.
+[Homebridge](https://github.com/homebridge/homebridge) plugin to create a HomeKit Garage Door accessory with optional command line triggers. Why? iOS >13 CarPlay allows you to easily access your Garage when arriving and leaving your house. This plug-in allows to to create a Garage door which you can use as an automation trigger and trigger command line, e.g., to run a python script which sends a radio command to the Garage Door. Pull up to your house open the "Garage" on your dash which can unlock your front door, turn lights on, open your garage, etc.
 
 ![CarPlay Screenshot](https://github.com/fascpt/homebridge-garage-cli-cmd-trigger/blob/master/carplay.png?raw=true)
 
+## Compatibility
+Supports Homebridge v1.6.0 and v2.0.0+. Node.js 18, 20, 22 and 24 are supported.
+
 # Installation
-1. Install [Homebridge](https://github.com/nfarina/homebridge#installation)
+1. Install [Homebridge](https://github.com/homebridge/homebridge#installation)
 2. Install this plugin using `npm install -g homebridge-garage-cli-cmd-trigger`
 3. Edit your configuration file like the example below and restart Homebridge
 
@@ -12,7 +15,7 @@
 ```
 	"accessories": [
 		{
-			"accessory": "GarageCMDTrigger",
+			"accessory": "GarageCliCmdTrigger",
 			"name": "Garage Command Trigger",
 			"autoCloseDelay": 2,
 			"openCmd": "echo Garage OPENED",

@@ -5,11 +5,11 @@
   "schema": {
     "title": "Garage CLI Command Trigger",
     "type": "object",
+    "required": ["name"],
     "properties": {
       "name": {
         "title": "Name",
         "type": "string",
-        "required": true,
         "default": "Garage CLI Command Trigger",
         "description": "Name of Garage to appear in Home app"
       },

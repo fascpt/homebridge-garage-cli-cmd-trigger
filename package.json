@@ -1,6 +1,6 @@
 {
   "name": "homebridge-garage-cli-cmd-trigger",
-  "version": "1.3.0",
+  "version": "2.0.0-beta.0",
   "description": "Garage Opener with command line triggers support for Homebridge",
   "license": "MIT",
   "repository": {
@@ -19,11 +19,11 @@
     "carplay"
   ],
   "engines": {
-    "node": ">=6.4.0",
-    "homebridge": ">=0.3.0"
+    "node": "^18.20.4 || ^20.15.1 || ^22 || ^24",
+    "homebridge": "^1.6.0 || ^2.0.0"
   },
   "dependencies": {
-    "node-persist": "^2.1.0"
+    "node-persist": "^4.0.0"
   },
   "scripts": {},
   "main": "index.js"
